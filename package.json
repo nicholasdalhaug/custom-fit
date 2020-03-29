@@ -2,11 +2,11 @@
     "name": "custom-fit",
     "version": "1.0.0",
     "description": "",
-    "homepage": "http://nicholasdalhaug.github.io/custom-fit", 
+    "homepage": "http://nicholasdalhaug.github.io/custom-fit",
     "main": "js/app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "live-server", 
+        "start": "live-server",
         "predeploy": "",
         "deploy": "gh-pages -d dist"
     },
