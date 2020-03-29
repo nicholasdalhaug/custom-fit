@@ -1,0 +1,224 @@
+/* VARIABLES */
+:root{
+  --color-primary: #2196f3; /* Blue */
+  --color-darken: #1565c0; /* Blue darken 3 */
+  --color-valid: #4caf50; /* Green */
+  --color-invalid: #f44336; /* Red */
+}
+
+
+
+
+
+
+
+/* GENERAL */
+.bold {
+  font-weight: bold;
+}
+
+.cf-preloaders{
+  padding: 10px;
+}
+
+.cf-add-buttons{
+  padding-top: 10px;
+}
+
+
+
+
+
+
+/* FORMS GENERAL */
+.cf-forms .input-field {
+  margin-bottom: 0;
+}
+
+
+
+/* FORMS COLORS */
+/* label color */
+/*
+.cf-forms .input-field label {
+ color: #000;
+}
+*/
+/* label focus color */
+.cf-forms .input-field input[type=text]:focus + label,
+.cf-forms .input-field input[type=number]:focus + label,
+.cf-forms .input-field .select-wrapper .dropdown-content li>span{
+ color: var(--color-primary);
+}
+/* label underline focus color */
+.cf-forms .input-field input[type=text]:focus, 
+.cf-forms .input-field input[type=number]:focus {
+ border-bottom: 1px solid var(--color-primary);
+ box-shadow: 0 1px 0 0 var(--color-primary);
+}
+/* valid color */
+.cf-forms .input-field input[type=text].valid, 
+.cf-forms .input-field input[type=number].valid {
+ border-bottom: 1px solid var(--color-valid);
+ box-shadow: 0 1px 0 0 var(--color-valid);
+}
+/* invalid color */
+.cf-forms .input-field input[type=text].invalid, 
+.cf-forms .input-field input[type=number].invalid  {
+ border-bottom: 1px solid var(--color-invalid);
+ box-shadow: 0 1px 0 0 var(--color-invalid);
+}
+/* icon prefix focus color */
+.cf-forms .input-field .prefix.active {
+ color: var(--color-primary);
+}
+
+
+
+
+
+
+
+/* NAVIGATION */
+.cf-navs {
+/*  background-color: var(--color-primary);*/
+}
+.cf-sidenav-images{
+ width: 40%; 
+}
+
+
+
+
+
+
+
+
+
+/* OVERVIEW STYLES */
+/*
+cf-overview-panels
+cf-overview-dates
+cf-overview-names
+cf-overview-exercise-lists
+*/
+
+.cf-overview-panels {
+  display: grid;
+  grid-template-columns: 3fr minmax(0, 1fr); /* use minmax here or set minwidth of each element to 0. But this is necessary in order to not hvae overflow. */
+  grid-template-rows: 1fr 3fr;
+  
+  padding: 15px;
+}
+.cf-overview-dates{
+}
+.cf-overview-names{
+  font-size: 1.5rem;
+}
+.cf-overview-exercise-lists{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+
+
+
+
+
+
+
+/* FALLBACK STYLES */
+.cf-fallback-btns {
+/*  background-color: var(--color-primary);*/
+}
+
+
+
+
+
+
+
+/* EXERCISES */
+.cf-exercises-panels{
+  padding: 15px;
+}
+.cf-exercises-names{
+  font-size: 1.5rem;
+}
+.cf-exercises-settings{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+}
+.cf-exercises-settings div{
+/*  overflow: hidden;*/
+/*  box-sizing: content-box;*/
+}
+
+
+
+
+
+
+
+/* ROUTINES */
+.cf-routines-panels{
+  padding: 15px;
+}
+.cf-routines-names{
+  font-size: 1.5rem;
+}
+.cf-routines-settings{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
