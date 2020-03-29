@@ -1,0 +1,27 @@
+{
+  "name": "Custom Fit", 
+  "short_name": "CustomFit", 
+  "start_url": "/pages/overview.html", 
+  "display": "standalone", 
+  "background_color": "#1565c0", 
+  "theme_color": "#1565c0", 
+  "orientation": "portrait-primary", 
+  "icons": [
+    {
+      "src": "/img/logo_flat_192.png", 
+      "type": "image/png",
+      "sizes": "192x192"
+    }, 
+    {
+      "src": "/img/logo_flat_512.png", 
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
+
+
+
+
+
+
