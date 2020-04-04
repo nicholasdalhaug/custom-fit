@@ -1,7 +1,7 @@
 {
   "name": "Custom Fit", 
   "short_name": "CustomFit", 
-  "start_url": "/pages/overview.html", 
+  "start_url": ".", 
   "display": "standalone", 
   "background_color": "#1565c0", 
   "theme_color": "#1565c0", 
