@@ -15,6 +15,7 @@ import {
 import {Menu} from '@material-ui/icons'
 
 import customFitLogo from '../../resources/img/logo_gears_drawing_192.png'
+import { Link } from 'react-router-dom';
 
 interface NavBarProps {
     title: string
@@ -37,16 +38,30 @@ const NavBar = ({title}: NavBarProps) => {
     const classes = useStyles();
 
     return <>
+        <FixedAppBar>
+            <SideMenuButton />
+            <Typography variant="h5">
+                {title}
+            </Typography>
+            <div className={classes.grow} />
+            <MenuItems />
+        </FixedAppBar>
+    </>
+}
+
+interface FixedAppBarProps {
+    children: React.ReactNode
+}
+
+const FixedAppBar = ({children}: FixedAppBarProps) => {
+    // The last toolbar takes up the space under the appbar
+    return <>
         <AppBar position="fixed">
             <Toolbar>
-                <SideMenuButton />
-                <Typography variant="h5">
-                    {title}
-                </Typography>
-                <div className={classes.grow} />
-                <MenuItems />
+                {children}
             </Toolbar>
         </AppBar>
+        <Toolbar />
     </>
 }
 
@@ -85,8 +100,14 @@ const SideMenuButton = () => {
                     />
                 </ListItem>
                 {pageNames.map(pageName => {
-                    return <ListItem key={pageName} button>
-                        <ListItemText primary={pageName} />
+                    return <ListItem 
+                                key={pageName} 
+                                button 
+                                component={Link} 
+                                to={process.env.PUBLIC_URL + '/' + pageName}
+                                onClick={toggleIsOpen}
+                            >
+                        <ListItemText primary={capitalizeFirstLetter(pageName)} />
                     </ListItem>
                 })}
                 
@@ -95,14 +116,23 @@ const SideMenuButton = () => {
     </>
 }
 
-const pageNames = ["Overview", "Routines", "Exercises", "Stats", "Settings"];
+const pageNames = ["overview", "routines", "exercises", "stats", "settings"];
+
+function capitalizeFirstLetter(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
 
 const MenuItems = () => {
     return <>
         <Hidden mdDown>
             {pageNames.map(pageName => {
-                return <Button key={pageName} color="inherit">
-                    {pageName}
+                return <Button 
+                            key={pageName} 
+                            color="inherit"
+                            component={Link} 
+                            to={process.env.PUBLIC_URL + '/' + pageName}
+                        >
+                    {capitalizeFirstLetter(pageName)}
                 </Button>
             })}
         </Hidden>
