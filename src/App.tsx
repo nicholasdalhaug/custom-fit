@@ -1,9 +1,9 @@
 import React from 'react';
 import Overview from './pages/Overview';
-import NavBar from './components/Navbar';
+import NavBar from './components/navbar/Navbar';
 import { ThemeProvider } from '@material-ui/core';
 
-import {theme} from './utils/theme'
+import {theme} from './resources/theme'
 
 function App() {
   return <>
