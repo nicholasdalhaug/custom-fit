@@ -10,7 +10,7 @@ import {
     SwipeableDrawer, 
     ListItem, 
     List, 
-    ListItemText 
+    ListItemText
 } from '@material-ui/core';
 import {Menu} from '@material-ui/icons'
 
@@ -76,7 +76,6 @@ const SideMenuButton = () => {
     return <>
         <Hidden lgUp>
             <IconButton 
-                edge="start" 
                 color="inherit" 
                 aria-label="menu"
                 onClick={toggleIsOpen}

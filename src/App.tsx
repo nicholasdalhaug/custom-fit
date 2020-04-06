@@ -1,10 +1,12 @@
 import React from 'react';
-import Overview from './pages/Overview';
 import NavBar from './components/navbar/Navbar';
+import Overview from './pages/Overview';
+import PageNotFound from './pages/PageNotFound'
 import { ThemeProvider } from '@material-ui/core';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
 import {theme} from './resources/theme'
+import 'typeface-roboto';
 
 function App() {
 	return <>
@@ -19,7 +21,8 @@ function App() {
 						<Overview />
 					</Route>
 					<Route>
-						<NavBar title="Page not found" />
+						<NavBar title="" />
+						<PageNotFound />
 					</Route>
 				</Switch>
 			</Router>
