@@ -1,7 +1,8 @@
 import React from 'react';
 import NavBar from './components/navbar/Navbar';
 import Overview from './pages/Overview';
-import PageNotFound from './pages/PageNotFound'
+import Exercises from './pages/Exercises';
+import PageNotFound from './pages/PageNotFound';
 import { ThemeProvider } from '@material-ui/core';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
@@ -19,6 +20,10 @@ function App() {
 					<Route exact path={process.env.PUBLIC_URL + '/overview'}>
 						<NavBar title="Overview" />
 						<Overview />
+					</Route>
+					<Route exact path={process.env.PUBLIC_URL + '/exercises'}>
+						<NavBar title="Exercises" />
+						<Exercises />
 					</Route>
 					<Route>
 						<NavBar title="" />
