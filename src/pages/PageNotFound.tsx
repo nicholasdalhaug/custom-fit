@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, makeStyles, Typography } from '@material-ui/core';
+import { Button, makeStyles, Typography, Container } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const usePageNotFoundStyle = makeStyles({
@@ -12,9 +12,9 @@ const PageNotFound = () => {
     const classes = usePageNotFoundStyle();
 
     return <>
-        <div className={classes.container}>
+        <Container className={classes.container}>
             <PageNotFoundContent />
-        </div>
+        </Container>
     </>
 }
 
