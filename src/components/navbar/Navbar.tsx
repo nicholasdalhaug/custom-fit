@@ -15,11 +15,7 @@ import {
 import {Menu} from '@material-ui/icons'
 
 import customFitLogo from '../../resources/img/logo_gears_drawing_192.png'
-import { Link } from 'react-router-dom';
-
-interface NavBarProps {
-    title: string
-}
+import { Link, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -34,19 +30,37 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const NavBar = ({title}: NavBarProps) => {
+const NavBar = () => {
     const classes = useStyles();
+    const location = useLocation();
 
+    const lowerCaseLocationName = lastPartOfPath(location.pathname);
+    let locationName = "";
+    if(pageNames.includes(lowerCaseLocationName)) {
+        locationName = capitalizeFirstLetter(lowerCaseLocationName);
+    }
+    
     return <>
         <FixedAppBar>
             <SideMenuButton />
             <Typography variant="h5">
-                {title}
+                {locationName}
             </Typography>
             <div className={classes.grow} />
             <MenuItems />
         </FixedAppBar>
     </>
+}
+
+const pageNames = ["overview", "routines", "exercises", "stats", "settings"];
+
+const lastPartOfPath = (path: string) => {
+    const pathParts = path.split("/");
+    return pathParts[pathParts.length - 1]
+}
+
+const capitalizeFirstLetter = (text: string) => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 interface FixedAppBarProps {
@@ -113,12 +127,6 @@ const SideMenuButton = () => {
             </List>
         </SwipeableDrawer>
     </>
-}
-
-const pageNames = ["overview", "routines", "exercises", "stats", "settings"];
-
-function capitalizeFirstLetter(text: string) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 const MenuItems = () => {
