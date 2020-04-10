@@ -1,49 +1,8 @@
 import React from 'react';
-import { Card, CardContent, Typography, CardActions, Button, makeStyles, Grid, Box } from '@material-ui/core';
+import { Card, CardContent, Typography, Grid, Box } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    root: {
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-  });
-
-const ExercisesCard = () => {
-    const classes = useStyles();
-
-    return <>
-        <Card className={classes.root}>
-            <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                    Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    be*nev*o*lent
-                </Typography>
-                <Typography color="textSecondary">
-                    adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
-    </>
-}
+import AddButton from '../components/AddButton'
+import Center from '../components/Center'
 
 interface ExerciseParameterProps {
     name: string, 
@@ -52,12 +11,12 @@ interface ExerciseParameterProps {
 
 const ExerciseParameter = ({name, value}: ExerciseParameterProps) => {
     return <>
-        <Typography display="inline">
+        <Typography component={'span'}>
             <Box fontWeight="fontWeightBold" display="inline">
                 {name + ": "}
             </Box>
         </Typography>
-        <Typography display="inline">
+        <Typography component={'span'}>
             {value}
         </Typography>
     </>
@@ -83,7 +42,7 @@ const ExerciseCard = ({exercise}: ExerciseCardProps) => {
             <CardContent>
                 <Grid container>
                     <Grid item xs={12}>
-                        <Typography variant="h5">
+                        <Typography gutterBottom variant="h5">
                             {exercise.name}
                         </Typography>
                     </Grid>
@@ -128,32 +87,16 @@ const Exercises = () => {
 
     return <>
         <Grid container spacing={3}>
-            <Grid item xs={12}> 
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
                 <ExerciseCard exercise={legPress} />
             </Grid>
-            <Grid item xs={12}> 
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
                 <ExerciseCard exercise={chestPress} />
             </Grid>
             <Grid item xs={12}>
-                <ExercisesCard />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                <ExercisesCard />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                <ExercisesCard />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <ExercisesCard />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <ExercisesCard />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <ExercisesCard />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-                <ExercisesCard />
+                <Center>
+                    <AddButton />
+                </Center>
             </Grid>
         </Grid>
     </>
