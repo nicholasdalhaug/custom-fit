@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Typography, Grid } from '@material-ui/core';
 
-import {Exercise} from '../../pages/Exercises'
 import InputField, { State } from './InputField'
 import SelectField from './SelectField'
 import AddButton from '../AddButton';
 import Center from '../Center';
+import { Exercise } from '../../resources/firebase/exercises';
 interface CombinedStatus {
     name: State
     reps: State

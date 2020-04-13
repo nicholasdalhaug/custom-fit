@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Grid, Box } from '@material-ui/core';
+import { Card, CardContent, Typography, Grid, Box, CircularProgress } from '@material-ui/core';
 
 import AddButton from '../components/AddButton'
 import Center from '../components/Center'
 import ExerciseForm from '../components/forms/ExerciseForm'
+import { useStoredExercises, Exercise } from '../resources/firebase/exercises'
 
 interface ExerciseParameterProps {
     name: string, 
@@ -21,15 +22,6 @@ const ExerciseParameter = ({name, value}: ExerciseParameterProps) => {
             {value}
         </Typography>
     </>
-}
-
-export interface Exercise {
-    name: string, 
-    reps: number, 
-    sets: number, 
-    pause: number, 
-    increment: number, 
-    weight: number
 }
 
 interface ExerciseCardProps {
@@ -75,22 +67,7 @@ const Exercises = () => {
         setIsFormOpen(!isFormOpen);
     }
 
-    const legPress: Exercise = {
-        name: "Leg press", 
-        reps: 12, 
-        sets: 3, 
-        pause: 90, 
-        increment: 2.5, 
-        weight: 172.5
-    }
-    const chestPress: Exercise = {
-        name: "Chest press", 
-        reps: 12, 
-        sets: 3,
-        pause: 90,
-        increment: 2.5,
-        weight: 80
-    }
+    const storedExercises = useStoredExercises();
 
     if(isFormOpen){
         return <>
@@ -101,15 +78,21 @@ const Exercises = () => {
     return <>
         <Box mt={1}>
             <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
-                    <ExerciseCard exercise={legPress} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
-                    <ExerciseCard exercise={chestPress} />
-                </Grid>
+                {storedExercises &&
+                    storedExercises.map((storedExercise) => {
+                        return <Grid item key={storedExercise.id} xs={12} sm={6} md={4} lg={4} xl={3}>
+                            <ExerciseCard exercise={storedExercise.exercise} />
+                        </Grid>
+                    })
+                }
                 <Grid item xs={12}>
                     <Center>
-                        <AddButton onClick={() => toggleIsFormOpen()}/>
+                        {!storedExercises &&
+                            <CircularProgress />
+                        }
+                        {storedExercises &&
+                            <AddButton />
+                        }
                     </Center>
                 </Grid>
             </Grid>
