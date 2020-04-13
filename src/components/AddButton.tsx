@@ -8,12 +8,22 @@ const useStyles = makeStyles({
     }
 });
 
-const AddButton = () => {
+interface AddButtonProps {
+    onClick?: () => void
+}
+
+const AddButton = ({onClick}: AddButtonProps) => {
     const classes = useStyles();
 
     return <>
-        <IconButton>
-            <AddCircle color="primary" fontSize="large" className={classes.bigButton} />
+        <IconButton
+            onClick={onClick}
+        >
+            <AddCircle 
+                color="primary" 
+                fontSize="large" 
+                className={classes.bigButton} 
+            />
         </IconButton>
     </>
 }

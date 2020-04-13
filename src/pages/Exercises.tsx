@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, Typography, Grid, Box } from '@material-ui/core';
 
 import AddButton from '../components/AddButton'
 import Center from '../components/Center'
+import ExerciseForm from '../components/forms/ExerciseForm'
 
 interface ExerciseParameterProps {
     name: string, 
@@ -22,7 +23,7 @@ const ExerciseParameter = ({name, value}: ExerciseParameterProps) => {
     </>
 }
 
-interface Exercise {
+export interface Exercise {
     name: string, 
     reps: number, 
     sets: number, 
@@ -68,6 +69,12 @@ const ExerciseCard = ({exercise}: ExerciseCardProps) => {
 }
 
 const Exercises = () => {
+    const [isFormOpen, setIsFormOpen] = useState(true);
+
+    const toggleIsFormOpen = () => {
+        setIsFormOpen(!isFormOpen);
+    }
+
     const legPress: Exercise = {
         name: "Leg press", 
         reps: 12, 
@@ -85,20 +92,28 @@ const Exercises = () => {
         weight: 80
     }
 
+    if(isFormOpen){
+        return <>
+            <ExerciseForm />
+        </>
+    }
+
     return <>
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
-                <ExerciseCard exercise={legPress} />
+        <Box mt={1}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
+                    <ExerciseCard exercise={legPress} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
+                    <ExerciseCard exercise={chestPress} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Center>
+                        <AddButton onClick={() => toggleIsFormOpen()}/>
+                    </Center>
+                </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={4} xl={3}> 
-                <ExerciseCard exercise={chestPress} />
-            </Grid>
-            <Grid item xs={12}>
-                <Center>
-                    <AddButton />
-                </Center>
-            </Grid>
-        </Grid>
+        </Box>
     </>
 }
 
