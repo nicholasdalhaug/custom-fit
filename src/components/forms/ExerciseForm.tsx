@@ -4,9 +4,12 @@ import { Typography, Grid } from '@material-ui/core';
 
 import InputField, { State } from './InputField'
 import SelectField from './SelectField'
-import AddButton from '../AddButton';
+import AddButton from '../buttons/AddButton';
+import BackButton from '../buttons/BackButton';
+import EditButton from '../buttons/EditButton';
+import DeleteButton from '../buttons/DeleteButton';
 import Center from '../Center';
-import { Exercise } from '../../resources/firebase/exercises';
+import { Exercise, StoredExercise } from '../../resources/firebase/exercises';
 interface CombinedStatus {
     name: State
     reps: State
@@ -51,11 +54,15 @@ const isValidNumber = (prop: keyof CombinedValidityParams, value:  number | unde
 }
 
 interface ExerciseFormProps {
-    exercise?: Exercise
+    storedExercise?: StoredExercise
+    onClickBack: () => void
+    onClickAddVerified: (exercise: Exercise) => void
+    onClickEditVerified?: (storedExercise: StoredExercise) => void
+    onClickDeleteVerified?: (storedExercise: StoredExercise) => void
 }
 
-const ExerciseForm = ({exercise}: ExerciseFormProps) => {
-    const initialExercise = exercise !== undefined ? exercise : {
+const ExerciseForm = ({storedExercise, onClickBack, onClickAddVerified, onClickEditVerified, onClickDeleteVerified}: ExerciseFormProps) => {
+    const initialExercise = storedExercise !== undefined ? storedExercise.exercise : {
         name: '',
         reps: undefined, 
         sets: undefined, 
@@ -129,6 +136,46 @@ const ExerciseForm = ({exercise}: ExerciseFormProps) => {
             increment: incrementStatus,
             weight: weightStatus
         })
+    }
+
+    const areAllValid: () => boolean = () => {
+        return isValidNumber('name', exerciseState.name.length)
+            && isValidNumber('reps', exerciseState.reps)
+            && isValidNumber('sets', exerciseState.sets)
+            && isValidNumber('increment', exerciseState.increment)
+            && isValidNumber('weight', exerciseState.weight)
+    }
+
+    const onClickAdd = onClickAddVerified === undefined ? undefined : () => {
+        if(areAllValid()){
+            onClickAddVerified(exerciseState as Exercise);
+            onClickBack();
+        }
+        else{
+            validateForm();
+        }
+    }
+    const onClickEdit = onClickEditVerified === undefined ? undefined : () => {
+        if(areAllValid()){
+            const editedStoredExercise: StoredExercise = {
+                id: (storedExercise as unknown as StoredExercise).id,
+                exercise: exerciseState as Exercise
+            }
+            onClickEditVerified(editedStoredExercise);
+            onClickBack();
+        }
+        else{
+            validateForm();
+        }
+    }
+    const onClickDelete = onClickDeleteVerified === undefined ? undefined : () => {
+        if(areAllValid()){
+            onClickDeleteVerified(storedExercise as unknown as StoredExercise);
+            onClickBack();
+        }
+        else{
+            validateForm();
+        }
     }
     
     return <>
@@ -214,7 +261,14 @@ const ExerciseForm = ({exercise}: ExerciseFormProps) => {
             </Grid>
             <Grid item xs={12}>
                 <Center>
-                    <AddButton onClick={validateForm} />
+                    <BackButton onClick={onClickBack} />
+                    <AddButton onClick={onClickAdd} />
+                    {onClickEdit !== undefined && 
+                        <EditButton onClick={onClickEdit} />
+                    }
+                    {onClickDelete !== undefined && 
+                        <DeleteButton onClick={onClickDelete} />
+                    }
                 </Center>
             </Grid>
         </Grid>
