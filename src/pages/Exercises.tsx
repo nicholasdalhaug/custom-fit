@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid, Box, CircularProgress, CardActionA
 
 import AddButton from '../components/buttons/AddButton'
 import Center from '../components/Center'
-import ExerciseForm from '../components/forms/ExerciseForm'
+import ExerciseFormWithValidation from '../components/forms/ExerciseFormWithValidation'
 import { useStoredExercises, Exercise, StoredExercise, addExerciseToStore, editExerciseInStore, deleteExerciseFromStore } from '../resources/firebase/exercises'
 
 interface ExerciseParameterProps {
@@ -89,33 +89,38 @@ const Exercises = () => {
 
         addExerciseToStore(exercise)
     }
-    const onClickFormEdit = (storedExercise: StoredExercise) => {
+    const onClickFormEdit = (exercise: Exercise) => {
         console.log("Editing exercise: ")
-        console.log(storedExercise)
+        console.log(exercise)
 
-        editExerciseInStore(storedExercise)
+        const newStoredExercise: StoredExercise = {
+            id: selectedExercise.id,
+            exercise: exercise
+        }
+
+        editExerciseInStore(newStoredExercise)
     }
-    const onClickFormDelete = (storedExercise: StoredExercise) => {
+    const onClickFormDelete = () => {
         console.log("Deleting exercise: ")
-        console.log(storedExercise)
+        console.log(selectedExercise)
 
-        deleteExerciseFromStore(storedExercise)
+        deleteExerciseFromStore(selectedExercise)
     }
 
     if(isFormOpen){
         if(selectedExercise === undefined){
-            return <ExerciseForm 
+            return <ExerciseFormWithValidation 
                 onClickBack={onClickFormBack} 
-                onClickAddVerified={onClickFormAdd}
+                onClickAddValidated={onClickFormAdd}
             />
         }
         else {
-            return <ExerciseForm 
-                storedExercise={selectedExercise}
+            return <ExerciseFormWithValidation 
+                exercise={selectedExercise.exercise}
                 onClickBack={onClickFormBack} 
-                onClickAddVerified={onClickFormAdd}
-                onClickEditVerified={onClickFormEdit}
-                onClickDeleteVerified={onClickFormDelete}
+                onClickAddValidated={onClickFormAdd}
+                onClickEditValidated={onClickFormEdit}
+                onClickDeleteValidated={onClickFormDelete}
             />
         }
     }
