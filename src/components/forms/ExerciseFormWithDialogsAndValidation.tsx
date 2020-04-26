@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
 
 import { Exercise } from '../../resources/firebase/exercises';
 import ExerciseFormWithValidation from './ExerciseFormWithValidation';
 import EditButton from '../buttons/EditButton';
 import AddButton from '../buttons/AddButton';
-import DeleteButton from '../buttons/DeleteButton';
 
 interface ExerciseFormWithDialogsAndValidationProps {
     exercise?: Exercise
@@ -84,7 +83,12 @@ const ExerciseFormWithDialogsAndValidation = ({
         >
             <DialogTitle>{"Are you sure you want to delete this exercise?"}</DialogTitle>
             <DialogActions>
-                <DeleteButton onClick={onClickConfirmedDelete} />
+                <Button onClick={onClickConfirmedDelete} variant="contained" color="primary">
+                    Yes
+                </Button>
+                <Button onClick={onCloseDeleteDialog} variant="contained">
+                    No
+                </Button>
             </DialogActions>
         </Dialog>
 
@@ -93,11 +97,11 @@ const ExerciseFormWithDialogsAndValidation = ({
                 open={isSaveDialogOpen}
                 onClose={onCloseSaveDialog}
             >
-                <DialogTitle>{"Do you want to save or edit this exercise?"}</DialogTitle>
+                <DialogTitle>{"Create new or edit?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        You can choose between saving this exercise as a new exercise 
-                        or editing the exercise you used to create this one. 
+                        You can choose between creating a new exercise 
+                        or editing the exercise you clicked. 
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
