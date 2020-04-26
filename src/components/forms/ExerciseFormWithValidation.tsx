@@ -18,16 +18,14 @@ const combinedValidityParams: CombinedValidityParams = {
 interface ExerciseFormWithValidationProps {
     exercise?: Exercise
     onClickBack: () => void
-    onClickAddValidated: (exercise: Exercise) => void
-    onClickEditValidated?: (exercise: Exercise) => void
+    onClickSaveValidated: (exercise: Exercise) => void
     onClickDeleteValidated?: () => void
 }
 
 const ExerciseFormWithValidation = ({
         exercise, 
         onClickBack, 
-        onClickAddValidated, 
-        onClickEditValidated, 
+        onClickSaveValidated,
         onClickDeleteValidated
     }: ExerciseFormWithValidationProps) => {
 
@@ -89,22 +87,14 @@ const ExerciseFormWithValidation = ({
             && isFieldValid('weight')
     }
 
-    const onClickAdd = () => {
+    const onClickSave = () => {
         if(areAllValid()){
-            onClickAddValidated(temporaryExercise as Exercise);
-            onClickBack();
-        }
-    }
-    const onClickEdit = onClickEditValidated === undefined ? undefined : () => {
-        if(areAllValid()){
-            onClickEditValidated(temporaryExercise as Exercise);
-            onClickBack();
+            onClickSaveValidated(temporaryExercise as Exercise);
         }
     }
     const onClickDelete = onClickDeleteValidated === undefined ? undefined : () => {
         if(areAllValid()){
             onClickDeleteValidated();
-            onClickBack();
         }
     }
     
@@ -116,8 +106,7 @@ const ExerciseFormWithValidation = ({
             onValueChange={onValueChange}
             onValidityChange={onValidityChange}
             onClickBack={onClickBack}
-            onClickAdd={onClickAdd}
-            onClickEdit={onClickEdit}
+            onClickSave={onClickSave}
             onClickDelete={onClickDelete}
         />
     </>

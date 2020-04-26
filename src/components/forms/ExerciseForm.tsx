@@ -3,9 +3,8 @@ import React from 'react';
 import { Typography, Grid, Card, CardContent } from '@material-ui/core';
 
 import { State } from "./fields/state";
-import AddButton from '../buttons/AddButton';
+import SaveButton from '../buttons/SaveButton';
 import BackButton from '../buttons/BackButton';
-import EditButton from '../buttons/EditButton';
 import DeleteButton from '../buttons/DeleteButton';
 import Center from '../Center';
 import { Exercise } from '../../resources/firebase/exercises';
@@ -54,8 +53,7 @@ interface ExerciseFormProps {
     onValueChange: (prop: keyof Exercise) => (value: string) => void
     onValidityChange: (prop: keyof Exercise) => (toStatus: State) => void
     onClickBack: () => void
-    onClickAdd: () => void
-    onClickEdit?: () => void
+    onClickSave: () => void
     onClickDelete?: () => void
 }
 
@@ -66,8 +64,7 @@ const ExerciseForm = ({
         onValueChange,
         onValidityChange, 
         onClickBack, 
-        onClickAdd, 
-        onClickEdit, 
+        onClickSave, 
         onClickDelete
     }: ExerciseFormProps) => {
     
@@ -182,10 +179,7 @@ const ExerciseForm = ({
                     <Grid item xs={12}>
                         <Center>
                             <BackButton onClick={onClickBack} />
-                            <AddButton onClick={onClickAdd} />
-                            {onClickEdit !== undefined && 
-                                <EditButton onClick={onClickEdit} />
-                            }
+                            <SaveButton onClick={onClickSave} />
                             {onClickDelete !== undefined && 
                                 <DeleteButton onClick={onClickDelete} />
                             }

@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid, Box, CircularProgress, CardActionA
 
 import AddButton from '../components/buttons/AddButton'
 import Center from '../components/Center'
-import ExerciseFormWithValidation from '../components/forms/ExerciseFormWithValidation'
+import ExerciseFormWithDialogsAndValidation from '../components/forms/ExerciseFormWithDialogsAndValidation'
 import { useStoredExercises, Exercise, StoredExercise, addExerciseToStore, editExerciseInStore, deleteExerciseFromStore } from '../resources/firebase/exercises'
 
 interface ExerciseParameterProps {
@@ -109,18 +109,18 @@ const Exercises = () => {
 
     if(isFormOpen){
         if(selectedExercise === undefined){
-            return <ExerciseFormWithValidation 
+            return <ExerciseFormWithDialogsAndValidation 
                 onClickBack={onClickFormBack} 
-                onClickAddValidated={onClickFormAdd}
+                onClickAdd={onClickFormAdd}
             />
         }
         else {
-            return <ExerciseFormWithValidation 
+            return <ExerciseFormWithDialogsAndValidation 
                 exercise={selectedExercise.exercise}
                 onClickBack={onClickFormBack} 
-                onClickAddValidated={onClickFormAdd}
-                onClickEditValidated={onClickFormEdit}
-                onClickDeleteValidated={onClickFormDelete}
+                onClickAdd={onClickFormAdd}
+                onClickEdit={onClickFormEdit}
+                onClickDelete={onClickFormDelete}
             />
         }
     }
