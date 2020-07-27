@@ -44,3 +44,19 @@ export const addExerciseToStore = (exercise: Exercise) => {
         .collection('exercises')
         .add(exercise)
 }
+
+export const editExerciseInStore = (storedExercise: StoredExercise) => {
+    return firebase
+        .firestore()
+        .collection("exercises")
+        .doc(storedExercise.id)
+        .update(storedExercise.exercise)
+}
+
+export const deleteExerciseFromStore = (storedExercise: StoredExercise) => {
+    return firebase
+        .firestore()
+        .collection("exercises")
+        .doc(storedExercise.id)
+        .delete()
+}

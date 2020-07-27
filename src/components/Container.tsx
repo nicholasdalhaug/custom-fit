@@ -7,7 +7,7 @@ interface ContainerProps {
 
 const Container = ({children}: ContainerProps) => {
     return <>
-        <Box mt={3}>
+        <Box mt={2}>
             <MUIContainer>
                 {children}
             </MUIContainer>
