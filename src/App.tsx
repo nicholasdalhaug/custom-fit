@@ -4,6 +4,7 @@ import Overview from './pages/Overview';
 import Exercises from './pages/Exercises';
 import PageNotFound from './pages/PageNotFound';
 import Container from './components/Container'
+import Login from './components/Login'
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
@@ -14,12 +15,14 @@ function App() {
 	return <>
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<Router>
-				<NavBar />
-				<Container>
-					<ChooseRoute />
-				</Container>
-			</Router>
+			<Login>
+				<Router>
+					<NavBar />
+					<Container>
+							<ChooseRoute />
+					</Container>
+				</Router>
+			</Login>
 		</ThemeProvider>
 	</>;
 }
