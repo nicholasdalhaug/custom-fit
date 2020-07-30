@@ -3,6 +3,7 @@ import {StyledFirebaseAuth} from 'react-firebaseui'
 import firebase from '../resources/firebase/firebase';
 import { Typography, CircularProgress, makeStyles, Container } from '@material-ui/core';
 import 'firebase/auth';
+import * as firebaseui from 'firebaseui';
 
 interface LoginProps {
     children: React.ReactNode
@@ -57,11 +58,23 @@ const LoginWaiting = () => {
 const LoginPrompt = () => {
     const classes = useStyle();
 
-    const uiConfig = {
+    const uiConfig: firebaseui.auth.Config = {
+        autoUpgradeAnonymousUsers: true, 
         signInFlow: 'popup', 
         signInOptions: [
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID, 
+            firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
         ], 
+        callbacks: {
+            signInFailure: function(error: firebaseui.auth.AuthUIError) {
+                if (error.code === 'firebaseui/anonymous-upgrade-merge-conflict') {
+                    console.log(`Encountered anonymous upgrade merge conflict. `)
+                    var cred = error.credential;
+                    return firebase.auth().signInWithCredential(cred).then();
+                }
+                return Promise.resolve()
+            }
+        }
     };
 
     return <>

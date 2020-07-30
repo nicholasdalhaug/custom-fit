@@ -16,6 +16,7 @@ import {Menu} from '@material-ui/icons'
 
 import customFitLogo from '../../resources/img/logo_gears_drawing_192.png'
 import { Link, useLocation } from 'react-router-dom';
+import firebase from '../../resources/firebase/firebase';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -87,6 +88,12 @@ const SideMenuButton = () => {
         setIsOpen(!isOpen);
     }
 
+    const signOut = () => {
+        toggleIsOpen();
+
+        firebase.auth().signOut();
+    }
+
     return <>
         <Hidden lgUp>
             <IconButton 
@@ -123,6 +130,14 @@ const SideMenuButton = () => {
                         <ListItemText primary={capitalizeFirstLetter(pageName)} />
                     </ListItem>
                 })}
+                <ListItem 
+                    button 
+                    component={Link} 
+                    to={process.env.PUBLIC_URL + '/'}
+                    onClick={signOut}
+                >
+                    <ListItemText primary="Sign Out" />
+                </ListItem>
                 
             </List>
         </SwipeableDrawer>
@@ -130,6 +145,10 @@ const SideMenuButton = () => {
 }
 
 const MenuItems = () => {
+    const signOut = () => {
+        firebase.auth().signOut();
+    }
+
     return <>
         <Hidden mdDown>
             {pageNames.map(pageName => {
@@ -142,6 +161,14 @@ const MenuItems = () => {
                     {capitalizeFirstLetter(pageName)}
                 </Button>
             })}
+            <Button 
+                color="inherit"
+                onClick={signOut}
+                component={Link} 
+                to={process.env.PUBLIC_URL + '/'}
+            >
+                Sign Out
+            </Button>
         </Hidden>
     </>
 }
