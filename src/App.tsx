@@ -6,7 +6,7 @@ import PageNotFound from './pages/PageNotFound';
 import Container from './components/Container'
 import Login from './components/Login'
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+import { HashRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import {theme} from './resources/theme'
 import 'typeface-roboto';
@@ -16,12 +16,12 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Login>
-				<BrowserRouter basename={process.env.PUBLIC_URL}>
+				<HashRouter basename={process.env.PUBLIC_URL}>
 					<NavBar />
 					<Container>
 							<ChooseRoute />
 					</Container>
-				</BrowserRouter>
+				</HashRouter>
 			</Login>
 		</ThemeProvider>
 	</>;
