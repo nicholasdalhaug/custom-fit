@@ -124,7 +124,7 @@ const SideMenuButton = () => {
                                 key={pageName} 
                                 button 
                                 component={Link} 
-                                to={process.env.PUBLIC_URL + '/' + pageName}
+                                to={'/' + pageName}
                                 onClick={toggleIsOpen}
                             >
                         <ListItemText primary={capitalizeFirstLetter(pageName)} />
@@ -133,7 +133,7 @@ const SideMenuButton = () => {
                 <ListItem 
                     button 
                     component={Link} 
-                    to={process.env.PUBLIC_URL + '/'}
+                    to="/"
                     onClick={signOut}
                 >
                     <ListItemText primary="Sign Out" />
@@ -156,7 +156,7 @@ const MenuItems = () => {
                             key={pageName} 
                             color="inherit"
                             component={Link} 
-                            to={process.env.PUBLIC_URL + '/' + pageName}
+                            to={'/' + pageName}
                         >
                     {capitalizeFirstLetter(pageName)}
                 </Button>
@@ -165,7 +165,7 @@ const MenuItems = () => {
                 color="inherit"
                 onClick={signOut}
                 component={Link} 
-                to={process.env.PUBLIC_URL + '/'}
+                to="/"
             >
                 Sign Out
             </Button>

@@ -6,7 +6,7 @@ import PageNotFound from './pages/PageNotFound';
 import Container from './components/Container'
 import Login from './components/Login'
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import {theme} from './resources/theme'
 import 'typeface-roboto';
@@ -16,12 +16,12 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Login>
-				<Router>
+				<BrowserRouter basename={process.env.PUBLIC_URL}>
 					<NavBar />
 					<Container>
 							<ChooseRoute />
 					</Container>
-				</Router>
+				</BrowserRouter>
 			</Login>
 		</ThemeProvider>
 	</>;
@@ -30,13 +30,13 @@ function App() {
 const ChooseRoute = () => {
 	return <>
 		<Switch>
-			<Route exact path={process.env.PUBLIC_URL} >
-				<Redirect to={process.env.PUBLIC_URL + '/overview'} />
+			<Route exact path="/" >
+				<Redirect to="/overview" />
 			</Route>
-			<Route exact path={process.env.PUBLIC_URL + '/overview'}>
+			<Route exact path="/overview">
 				<Overview />
 			</Route>
-			<Route exact path={process.env.PUBLIC_URL + '/exercises'}>
+			<Route exact path="/exercises">
 				<Exercises />
 			</Route>
 			<Route>

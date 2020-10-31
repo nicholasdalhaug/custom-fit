@@ -30,7 +30,7 @@ const PageNotFoundContent = () => {
             color="primary" 
             variant="contained"
             component={Link} 
-            to={process.env.PUBLIC_URL + '/overview'}
+            to="/overview"
         >
             Overview
         </Button>
