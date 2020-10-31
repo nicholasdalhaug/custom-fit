@@ -9,7 +9,7 @@ const Container = ({children}: ContainerProps) => {
     return <>
         <Box mt={2}>
             <MUIContainer>
-                {children}
+                <>{children}</>
             </MUIContainer>
         </Box>
     </>
