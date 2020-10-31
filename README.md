@@ -15,3 +15,15 @@ The app is best suited for people that do pure strength workouts regularly. Each
 Each routine has: 
 * Routine name
 * List of exercises
+
+## Start app
+```
+npm install
+npm start
+```
+
+## Test app
+```
+npm install
+npm test
+```
